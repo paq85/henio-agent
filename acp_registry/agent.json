@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "name": "henio-agent",
+  "display_name": "Henio Agent",
+  "description": "AI agent with 90+ tools, persistent memory, and multi-platform support",
+  "icon": "icon.svg",
+  "distribution": {
+    "type": "command",
+    "command": "henio",
+    "args": ["acp"]
+  }
+}

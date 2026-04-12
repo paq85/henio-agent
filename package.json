@@ -1,0 +1,25 @@
+{
+  "name": "henio-agent",
+  "version": "0.1.0",
+  "description": "Henio Agent is an MIT-licensed AI agent, initially forked from Hermes Agent, with advanced tool-calling capabilities and a flexible toolset system.",
+  "private": true,
+  "scripts": {
+    "postinstall": "echo '✅ Browser tools ready. Run: python run_agent.py --help'"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/paq85/henio-agent.git"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/paq85/henio-agent/issues"
+  },
+  "homepage": "https://github.com/paq85/henio-agent#readme",
+  "dependencies": {
+    "agent-browser": "^0.13.0",
+    "@askjo/camoufox-browser": "^1.0.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
