@@ -490,7 +490,7 @@ Or if you installed Henio in a specific location:
 
 ### Available tools
 
-The MCP server exposes 10 tools, matching OpenClaw's channel bridge surface plus a Henio-specific channel browser:
+The MCP server exposes 10 tools for conversation browsing, event polling, approvals, and message sending across platforms:
 
 | Tool | Description |
 |------|-------------|

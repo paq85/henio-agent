@@ -57,7 +57,6 @@ class Platform(Enum):
     MATRIX = "matrix"
     HOMEASSISTANT = "homeassistant"
     EMAIL = "email"
-    SMS = "sms"
     DINGTALK = "dingtalk"
     API_SERVER = "api_server"
     WEBHOOK = "webhook"
@@ -279,9 +278,6 @@ class GatewayConfig:
                 connected.append(platform)
             # Email uses extra dict for config (address + imap_host + smtp_host)
             elif platform == Platform.EMAIL and config.extra.get("address"):
-                connected.append(platform)
-            # SMS uses api_key (Twilio auth token) — SID checked via env
-            elif platform == Platform.SMS and os.getenv("TWILIO_ACCOUNT_SID"):
                 connected.append(platform)
             # API Server uses enabled flag only (no token needed)
             elif platform == Platform.API_SERVER:
@@ -884,21 +880,6 @@ def _apply_env_overrides(config: GatewayConfig) -> None:
             platform=Platform.EMAIL,
             chat_id=email_home,
             name=os.getenv("EMAIL_HOME_ADDRESS_NAME", "Home"),
-        )
-
-    # SMS (Twilio)
-    twilio_sid = os.getenv("TWILIO_ACCOUNT_SID")
-    if twilio_sid:
-        if Platform.SMS not in config.platforms:
-            config.platforms[Platform.SMS] = PlatformConfig()
-        config.platforms[Platform.SMS].enabled = True
-        config.platforms[Platform.SMS].api_key = os.getenv("TWILIO_AUTH_TOKEN", "")
-    sms_home = os.getenv("SMS_HOME_CHANNEL")
-    if sms_home and Platform.SMS in config.platforms:
-        config.platforms[Platform.SMS].home_channel = HomeChannel(
-            platform=Platform.SMS,
-            chat_id=sms_home,
-            name=os.getenv("SMS_HOME_CHANNEL_NAME", "Home"),
         )
 
     # API Server

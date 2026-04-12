@@ -192,7 +192,6 @@ class WebhookAdapter(BasePlatformAdapter):
             "discord",
             "slack",
             "signal",
-            "sms",
             "whatsapp",
             "matrix",
             "mattermost",

@@ -5,7 +5,7 @@ AgenticOPDEnv — On-Policy Distillation for Agentic Tool-Calling Tasks
 First Atropos environment to populate the distill_token_ids / distill_logprobs
 fields on ScoredDataGroup, enabling on-policy distillation (OPD) training.
 
-Key idea (from OpenClaw-RL, Princeton 2026):
+Key idea (from a 2026 conversational agent-RL paper):
   Every time an agent receives a next-state signal (tool result, error trace,
   test verdict), that signal contains hindsight information about how the
   agent's PREVIOUS response could have been better. This environment:
@@ -54,8 +54,7 @@ Usage:
         --openai.base_url http://localhost:8000/v1 \\
         --openai.model_name Qwen/Qwen3-4B
 
-Reference: Wang et al., "OpenClaw-RL: Train Any Agent Simply by Talking"
-           arXiv:2603.10165, March 2026
+Reference: Wang et al., arXiv:2603.10165, March 2026
 """
 
 from __future__ import annotations
@@ -215,7 +214,7 @@ BUILTIN_CODING_TASKS = [
 
 
 # ═══════════════════════════════════════════════════════════════════════
-# Hint extraction prompts (adapted from OpenClaw-RL)
+# Hint extraction prompts (adapted from the referenced 2026 agent-RL paper)
 # ═══════════════════════════════════════════════════════════════════════
 
 _HINT_JUDGE_SYSTEM = (

@@ -942,234 +942,6 @@ def cmd_identity(args) -> None:
         print("  Failed to seed identity. Check logs for details.\n")
 
 
-def cmd_migrate(args) -> None:
-    """Step-by-step migration guide: OpenClaw native memory → Henio + Honcho."""
-    from pathlib import Path
-
-    # ── Detect OpenClaw native memory files ──────────────────────────────────
-    cwd = Path(os.getcwd())
-    openclaw_home = Path.home() / ".openclaw"
-
-    # User peer: facts about the user
-    user_file_names = ["USER.md", "MEMORY.md"]
-    # AI peer: agent identity / configuration
-    agent_file_names = ["SOUL.md", "IDENTITY.md", "AGENTS.md", "TOOLS.md", "BOOTSTRAP.md"]
-
-    user_files: list[Path] = []
-    agent_files: list[Path] = []
-    for name in user_file_names:
-        for d in [cwd, openclaw_home]:
-            p = d / name
-            if p.exists() and p not in user_files:
-                user_files.append(p)
-    for name in agent_file_names:
-        for d in [cwd, openclaw_home]:
-            p = d / name
-            if p.exists() and p not in agent_files:
-                agent_files.append(p)
-
-    cfg = _read_config()
-    has_key = bool(_resolve_api_key(cfg))
-
-    print("\nHoncho migration: OpenClaw native memory → Henio\n" + "─" * 50)
-    print()
-    print("  OpenClaw's native memory stores context in local markdown files")
-    print("  (USER.md, MEMORY.md, SOUL.md, ...) and injects them via QMD search.")
-    print("  Honcho replaces that with a cloud-backed, LLM-observable memory layer:")
-    print("  context is retrieved semantically, injected automatically each turn,")
-    print("  and enriched by a dialectic reasoning layer that builds over time.")
-    print()
-
-    # ── Step 1: Honcho account ────────────────────────────────────────────────
-    print("Step 1  Create a Honcho account")
-    print()
-    if has_key:
-        masked = f"...{cfg['apiKey'][-8:]}" if len(cfg["apiKey"]) > 8 else "set"
-        print(f"  Honcho API key already configured: {masked}")
-        print("  Skip to Step 2.")
-    else:
-        print("  Honcho is a cloud memory service that gives Henio persistent memory")
-        print("  across sessions. You need an API key to use it.")
-        print()
-        print("  1. Get your API key at https://app.honcho.dev")
-        print("  2. Run:  henio honcho setup")
-        print("     Paste the key when prompted.")
-        print()
-        answer = _prompt("  Run 'henio honcho setup' now?", default="y")
-        if answer.lower() in ("y", "yes"):
-            cmd_setup(args)
-            cfg = _read_config()
-            has_key = bool(cfg.get("apiKey", ""))
-        else:
-            print()
-            print("  Run 'henio honcho setup' when ready, then re-run this walkthrough.")
-
-    # ── Step 2: Detected files ────────────────────────────────────────────────
-    print()
-    print("Step 2  Detected OpenClaw memory files")
-    print()
-    if user_files or agent_files:
-        if user_files:
-            print(f"  User memory ({len(user_files)} file(s)) — will go to Honcho user peer:")
-            for f in user_files:
-                print(f"    {f}")
-        if agent_files:
-            print(f"  Agent identity ({len(agent_files)} file(s)) — will go to Honcho AI peer:")
-            for f in agent_files:
-                print(f"    {f}")
-    else:
-        print("  No OpenClaw native memory files found in cwd or ~/.openclaw/.")
-        print("  If your files are elsewhere, copy them here before continuing,")
-        print("  or seed them manually:  henio honcho identity <path/to/file>")
-
-    # ── Step 3: Migrate user memory ───────────────────────────────────────────
-    print()
-    print("Step 3  Migrate user memory files → Honcho user peer")
-    print()
-    print("  USER.md and MEMORY.md contain facts about you that the agent should")
-    print("  remember across sessions. Honcho will store these under your user peer")
-    print("  and inject relevant excerpts into the system prompt automatically.")
-    print()
-    if user_files:
-        print(f"  Found: {', '.join(f.name for f in user_files)}")
-        print()
-        print("  These are picked up automatically the first time you run 'henio'")
-        print("  with Honcho configured and no prior session history.")
-        print("  (Henio calls migrate_memory_files() on first session init.)")
-        print()
-        print("  If you want to migrate them now without starting a session:")
-        for f in user_files:
-            print("    henio honcho migrate  — this step handles it interactively")
-        if has_key:
-            answer = _prompt("  Upload user memory files to Honcho now?", default="y")
-            if answer.lower() in ("y", "yes"):
-                try:
-                    from plugins.memory.honcho.client import (
-                        HonchoClientConfig,
-                        get_honcho_client,
-                        reset_honcho_client,
-                    )
-                    from plugins.memory.honcho.session import HonchoSessionManager
-
-                    reset_honcho_client()
-                    hcfg = HonchoClientConfig.from_global_config()
-                    client = get_honcho_client(hcfg)
-                    mgr = HonchoSessionManager(honcho=client, config=hcfg)
-                    session_key = hcfg.resolve_session_name()
-                    mgr.get_or_create(session_key)
-                    # Upload from each directory that had user files
-                    dirs_with_files = set(str(f.parent) for f in user_files)
-                    any_uploaded = False
-                    for d in dirs_with_files:
-                        if mgr.migrate_memory_files(session_key, d):
-                            any_uploaded = True
-                    if any_uploaded:
-                        print(f"  Uploaded user memory files from: {', '.join(dirs_with_files)}")
-                    else:
-                        print("  Nothing uploaded (files may already be migrated or empty).")
-                except Exception as e:
-                    print(f"  Failed: {e}")
-        else:
-            print("  Run 'henio honcho setup' first, then re-run this step.")
-    else:
-        print("  No user memory files detected. Nothing to migrate here.")
-
-    # ── Step 4: Seed AI identity ──────────────────────────────────────────────
-    print()
-    print("Step 4  Seed AI identity files → Honcho AI peer")
-    print()
-    print("  SOUL.md, IDENTITY.md, AGENTS.md, TOOLS.md, BOOTSTRAP.md define the")
-    print("  agent's character, capabilities, and behavioral rules. In OpenClaw")
-    print("  these are injected via file search at prompt-build time.")
-    print()
-    print("  In Henio, they are seeded once into Honcho's AI peer through the")
-    print("  observation pipeline. Honcho builds a representation from them and")
-    print("  from every subsequent assistant message (observe_me=True). Over time")
-    print("  the representation reflects actual behavior, not just declaration.")
-    print()
-    if agent_files:
-        print(f"  Found: {', '.join(f.name for f in agent_files)}")
-        print()
-        if has_key:
-            answer = _prompt("  Seed AI identity from all detected files now?", default="y")
-            if answer.lower() in ("y", "yes"):
-                try:
-                    from plugins.memory.honcho.client import (
-                        HonchoClientConfig,
-                        get_honcho_client,
-                        reset_honcho_client,
-                    )
-                    from plugins.memory.honcho.session import HonchoSessionManager
-
-                    reset_honcho_client()
-                    hcfg = HonchoClientConfig.from_global_config()
-                    client = get_honcho_client(hcfg)
-                    mgr = HonchoSessionManager(honcho=client, config=hcfg)
-                    session_key = hcfg.resolve_session_name()
-                    mgr.get_or_create(session_key)
-                    for f in agent_files:
-                        content = f.read_text(encoding="utf-8").strip()
-                        if content:
-                            ok = mgr.seed_ai_identity(session_key, content, source=f.name)
-                            status = "seeded" if ok else "failed"
-                            print(f"    {f.name}: {status}")
-                except Exception as e:
-                    print(f"  Failed: {e}")
-        else:
-            print("  Run 'henio honcho setup' first, then seed manually:")
-            for f in agent_files:
-                print(f"    henio honcho identity {f}")
-    else:
-        print("  No agent identity files detected.")
-        print("  To seed manually:  henio honcho identity <path/to/SOUL.md>")
-
-    # ── Step 5: What changes ──────────────────────────────────────────────────
-    print()
-    print("Step 5  What changes vs. OpenClaw native memory")
-    print()
-    print("  Storage")
-    print("    OpenClaw: markdown files on disk, searched via QMD at prompt-build time.")
-    print("    Henio:   cloud-backed Honcho peers. Files can stay on disk as source")
-    print("              of truth; Honcho holds the live representation.")
-    print()
-    print("  Context injection")
-    print("    OpenClaw: file excerpts injected synchronously before each LLM call.")
-    print("    Henio:   Honcho context fetched async at turn end, injected next turn.")
-    print("              First turn has no Honcho context; subsequent turns are loaded.")
-    print()
-    print("  Memory growth")
-    print("    OpenClaw: you edit files manually to update memory.")
-    print("    Henio:   Honcho observes every message and updates representations")
-    print("              automatically. Files become the seed, not the live store.")
-    print()
-    print("  Honcho tools (available to the agent during conversation)")
-    print("    honcho_context   — ask Honcho a question, get a synthesized answer (LLM)")
-    print("    honcho_search        — semantic search over stored context (no LLM)")
-    print("    honcho_profile       — fast peer card snapshot (no LLM)")
-    print("    honcho_conclude      — write a conclusion/fact back to memory (no LLM)")
-    print()
-    print("  Session naming")
-    print("    OpenClaw: no persistent session concept — files are global.")
-    print("    Henio:   per-session by default — each run gets its own session")
-    print("              Map a custom name:  henio honcho map <session-name>")
-
-    # ── Step 6: Next steps ────────────────────────────────────────────────────
-    print()
-    print("Step 6  Next steps")
-    print()
-    if not has_key:
-        print("  1. henio honcho setup              — configure API key (required)")
-        print("  2. henio honcho migrate            — re-run this walkthrough")
-    else:
-        print("  1. henio honcho status             — verify Honcho connection")
-        print("  2. henio                           — start a session")
-        print("     (user memory files auto-uploaded on first turn if not done above)")
-        print("  3. henio honcho identity --show    — verify AI peer representation")
-        print("  4. henio honcho tokens             — tune context and dialectic budgets")
-        print("  5. henio honcho mode               — view or change memory mode")
-    print()
-
-
 def honcho_command(args) -> None:
     """Route honcho subcommands."""
     global _profile_override
@@ -1201,8 +973,6 @@ def honcho_command(args) -> None:
         cmd_tokens(args)
     elif sub == "identity":
         cmd_identity(args)
-    elif sub == "migrate":
-        cmd_migrate(args)
     elif sub == "enable":
         cmd_enable(args)
     elif sub == "disable":
@@ -1211,7 +981,7 @@ def honcho_command(args) -> None:
         cmd_sync(args)
     else:
         print(f"  Unknown honcho command: {sub}")
-        print("  Available: status, sessions, map, peer, mode, tokens, identity, migrate, enable, disable, sync\n")
+        print("  Available: status, sessions, map, peer, mode, tokens, identity, enable, disable, sync\n")
 
 
 def register_cli(subparser) -> None:
@@ -1292,11 +1062,6 @@ def register_cli(subparser) -> None:
     identity_parser.add_argument(
         "--show", action="store_true",
         help="Show current AI peer representation from Honcho",
-    )
-
-    subs.add_parser(
-        "migrate",
-        help="Step-by-step migration guide from openclaw-honcho to Henio Honcho",
     )
     subs.add_parser("enable", help="Enable Honcho for the active profile")
     subs.add_parser("disable", help="Disable Honcho for the active profile")

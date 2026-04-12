@@ -13,7 +13,7 @@ metadata:
 
 # Henio Agent
 
-Henio Agent is an open-source AI agent framework by Nous Research that runs in your terminal, messaging platforms, and IDEs. It belongs to the same category as Claude Code (Anthropic), Codex (OpenAI), and OpenClaw — autonomous coding and task-execution agents that use tool calling to interact with your system. Henio works with any LLM provider (OpenRouter, Anthropic, OpenAI, DeepSeek, local models, and 15+ others) and runs on Linux, macOS, and WSL.
+Henio Agent is an open-source AI agent framework by Nous Research that runs in your terminal, messaging platforms, and IDEs. It belongs to the same category as Claude Code (Anthropic) and Codex (OpenAI) — autonomous coding and task-execution agents that use tool calling to interact with your system. Henio works with any LLM provider (OpenRouter, Anthropic, OpenAI, DeepSeek, local models, and 15+ others) and runs on Linux, macOS, and WSL.
 
 What makes Henio different:
 
@@ -148,7 +148,7 @@ henio gateway status       Check status
 henio gateway setup        Configure platforms
 ```
 
-Supported platforms: Telegram, Discord, Slack, WhatsApp, Signal, Email, SMS, Matrix, Mattermost, Home Assistant, DingTalk, Feishu, WeCom, API Server, Webhooks, Open WebUI.
+Supported platforms: Telegram, Discord, Slack, WhatsApp, Signal, Email, Matrix, Mattermost, Home Assistant, DingTalk, Feishu, WeCom, API Server, Webhooks, Open WebUI.
 
 Platform docs: https://paq85.github.io/henio-agent/docs/user-guide/messaging/
 
@@ -219,7 +219,6 @@ henio honcho setup/status  Honcho memory integration
 henio memory setup/status/off  Memory provider config
 henio completion bash|zsh  Shell completions
 henio acp                  ACP server (IDE integration)
-henio claw migrate         Migrate from OpenClaw
 henio uninstall            Uninstall Henio
 ```
 

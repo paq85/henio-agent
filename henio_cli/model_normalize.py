@@ -19,7 +19,7 @@ This module centralises that translation so callers can simply write::
 
     api_model = normalize_model_for_provider(user_input, provider)
 
-Inspired by Clawdbot's ``normalizeAnthropicModelId`` pattern.
+Inspired by the existing Anthropic model normalization pattern.
 """
 
 from __future__ import annotations

@@ -278,12 +278,6 @@ class TestHomeChannelEnvOverrides:
                 {"EMAIL_HOME_ADDRESS": "user@test.com", "EMAIL_HOME_ADDRESS_NAME": "Inbox"},
                 ("user@test.com", "Inbox"),
             ),
-            (
-                Platform.SMS,
-                PlatformConfig(enabled=True, api_key="token_abc"),
-                {"SMS_HOME_CHANNEL": "+15559876543", "SMS_HOME_CHANNEL_NAME": "My Phone"},
-                ("+15559876543", "My Phone"),
-            ),
         ]
 
         for platform, platform_config, env, expected in cases:

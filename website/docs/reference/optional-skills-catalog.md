@@ -81,12 +81,6 @@ henio skills uninstall <skill-name>
 |-------|-------------|
 | **fastmcp** | Build, test, inspect, install, and deploy MCP servers with FastMCP in Python. Covers wrapping APIs or databases as MCP tools, exposing resources or prompts, and deployment. |
 
-## Migration
-
-| Skill | Description |
-|-------|-------------|
-| **openclaw-migration** | Migrate a user's OpenClaw customization footprint into Henio Agent. Imports memories, SOUL.md, command allowlists, user skills, and selected workspace assets. |
-
 ## MLOps
 
 The largest optional category — covers the full ML pipeline from data curation to production inference.
@@ -117,9 +111,7 @@ The largest optional category — covers the full ML pipeline from data curation
 | Skill | Description |
 |-------|-------------|
 | **canvas** | Canvas LMS integration — fetch enrolled courses and assignments using API token authentication. |
-| **memento-flashcards** | Spaced repetition flashcard system for learning and knowledge retention. |
 | **siyuan** | SiYuan Note API for searching, reading, creating, and managing blocks and documents in a self-hosted knowledge base. |
-| **telephony** | Give Henio phone capabilities — provision a Twilio number, send/receive SMS/MMS, make calls, and place AI-driven outbound calls through Bland.ai or Vapi. |
 
 ## Research
 
@@ -138,7 +130,6 @@ The largest optional category — covers the full ML pipeline from data curation
 | Skill | Description |
 |-------|-------------|
 | **1password** | Set up and use 1Password CLI (op). Install the CLI, enable desktop app integration, sign in, and read/inject secrets for commands. |
-| **oss-forensics** | Open-source software forensics — analyze packages, dependencies, and supply chain risks. |
 | **sherlock** | OSINT username search across 400+ social networks. Hunt down social media accounts by username. |
 
 ---

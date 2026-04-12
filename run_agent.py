@@ -9883,7 +9883,7 @@ class AIAgent:
                         # giving up, append the assistant message as-is and
                         # continue — the model will see its own reasoning
                         # on the next turn and produce the text portion.
-                        # Inspired by clawdbot's "incomplete-text" recovery.
+                        # Inspired by prior incomplete-text recovery patterns.
                         _has_structured = bool(
                             getattr(assistant_message, "reasoning", None)
                             or getattr(assistant_message, "reasoning_content", None)

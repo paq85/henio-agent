@@ -7,12 +7,12 @@ Supports:
 - Inbound image/file/audio/media caching
 - Gateway allowlist integration via FEISHU_ALLOWED_USERS
 - Persistent dedup state across restarts
-- Per-chat serial message processing (matches openclaw createChatQueue)
+- Per-chat serial message processing
 - Persistent ACK emoji reaction on inbound messages
-- Reaction events routed as synthetic text events (matches openclaw)
+- Reaction events routed as synthetic text events
 - Interactive card button-click events routed as synthetic COMMAND events
-- Webhook anomaly tracking (matches openclaw createWebhookAnomalyTracker)
-- Verification token validation as second auth layer (matches openclaw)
+- Webhook anomaly tracking
+- Verification token validation as second auth layer
 """
 
 from __future__ import annotations
@@ -156,15 +156,15 @@ _DEFAULT_WEBHOOK_PATH = "/feishu/webhook"
 # TTL, rate-limit and webhook security constants
 # ---------------------------------------------------------------------------
 
-_FEISHU_DEDUP_TTL_SECONDS = 24 * 60 * 60          # 24 hours — matches openclaw
+_FEISHU_DEDUP_TTL_SECONDS = 24 * 60 * 60          # 24 hours
 _FEISHU_SENDER_NAME_TTL_SECONDS = 10 * 60          # 10 minutes sender-name cache
 _FEISHU_WEBHOOK_MAX_BODY_BYTES = 1 * 1024 * 1024   # 1 MB body limit
 _FEISHU_WEBHOOK_RATE_WINDOW_SECONDS = 60            # sliding window for rate limiter
-_FEISHU_WEBHOOK_RATE_LIMIT_MAX = 120               # max requests per window per IP — matches openclaw
+_FEISHU_WEBHOOK_RATE_LIMIT_MAX = 120               # max requests per window per IP
 _FEISHU_WEBHOOK_RATE_MAX_KEYS = 4096               # max tracked keys (prevents unbounded growth)
 _FEISHU_WEBHOOK_BODY_TIMEOUT_SECONDS = 30          # max seconds to read request body
 _FEISHU_WEBHOOK_ANOMALY_THRESHOLD = 25             # consecutive error responses before WARNING log
-_FEISHU_WEBHOOK_ANOMALY_TTL_SECONDS = 6 * 60 * 60  # anomaly tracker TTL (6 hours) — matches openclaw
+_FEISHU_WEBHOOK_ANOMALY_TTL_SECONDS = 6 * 60 * 60  # anomaly tracker TTL (6 hours)
 _FEISHU_CARD_ACTION_DEDUP_TTL_SECONDS = 15 * 60    # card action token dedup window (15 min)
 _FEISHU_BOT_MSG_TRACK_SIZE = 512                   # LRU size for tracking sent message IDs
 _FEISHU_REPLY_FALLBACK_CODES = frozenset({230011, 231003})  # reply target withdrawn/missing → create fallback
@@ -2036,7 +2036,7 @@ class FeishuAdapter(BasePlatformAdapter):
         and a persistent ACK emoji reaction before processing starts.
 
         - Per-chat lock: ensures messages in the same chat are processed one at a time
-          (matches openclaw's createChatQueue serial queue behaviour).
+                    (serial queue behavior).
         - ACK indicator: adds a CHECK reaction to the triggering message before handing
           off to the agent and leaves it in place as a receipt marker.
         """
@@ -2089,7 +2089,7 @@ class FeishuAdapter(BasePlatformAdapter):
     def _record_webhook_anomaly(self, remote_ip: str, status: str) -> None:
         """Increment the anomaly counter for remote_ip and emit a WARNING every threshold hits.
 
-        Mirrors openclaw's createWebhookAnomalyTracker: TTL 6 hours, log every 25 consecutive
+        Tracks webhook anomalies with a 6-hour TTL and logs every 25 consecutive
         error responses from the same IP.
         """
         now = time.time()
@@ -2327,7 +2327,7 @@ class FeishuAdapter(BasePlatformAdapter):
     async def _handle_webhook_request(self, request: Any) -> Any:
         remote_ip = (getattr(request, "remote", None) or "unknown")
 
-        # Rate limiting — composite key: app_id:path:remote_ip (matches openclaw key structure).
+        # Rate limiting — composite key: app_id:path:remote_ip.
         rate_key = f"{self._app_id}:{self._webhook_path}:{remote_ip}"
         if not self._check_webhook_rate_limit(rate_key):
             logger.warning("[Feishu] Webhook rate limit exceeded for %s", remote_ip)
@@ -2378,7 +2378,7 @@ class FeishuAdapter(BasePlatformAdapter):
         if payload.get("type") == "url_verification":
             return web.json_response({"challenge": payload.get("challenge", "")})
 
-        # Verification token check — second layer of defence beyond signature (matches openclaw).
+        # Verification token check — second layer of defence beyond signature.
         if self._verification_token:
             header = payload.get("header") or {}
             incoming_token = str(header.get("token") or payload.get("token") or "")
@@ -2442,8 +2442,8 @@ class FeishuAdapter(BasePlatformAdapter):
     def _check_webhook_rate_limit(self, rate_key: str) -> bool:
         """Return False when the composite rate_key has exceeded _FEISHU_WEBHOOK_RATE_LIMIT_MAX.
 
-        The rate_key is composed as "{app_id}:{path}:{remote_ip}" — matching openclaw's key
-        structure so the limit is scoped to a specific (account, endpoint, IP) triple rather
+        The rate_key is composed as "{app_id}:{path}:{remote_ip}" so the limit is scoped to a
+        specific (account, endpoint, IP) triple rather
         than a bare IP, which causes fewer false-positive denials in multi-tenant setups.
 
         The tracking dict is capped at _FEISHU_WEBHOOK_RATE_MAX_KEYS entries to prevent unbounded
@@ -2900,7 +2900,7 @@ class FeishuAdapter(BasePlatformAdapter):
     async def _resolve_sender_name_from_api(self, sender_id: Optional[str]) -> Optional[str]:
         """Fetch the sender's display name from the Feishu contact API with a 10-minute cache.
 
-        ID-type detection mirrors openclaw: ou_ → open_id, on_ → union_id, else user_id.
+        ID-type detection: ou_ → open_id, on_ → union_id, else user_id.
         Failures are silently suppressed; the message pipeline must not block on name resolution.
         """
         if not sender_id or not self._client:

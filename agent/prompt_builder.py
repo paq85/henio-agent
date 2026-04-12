@@ -192,7 +192,7 @@ TOOL_USE_ENFORCEMENT_MODELS = ("gpt", "codex", "gemini", "gemma", "grok")
 # OpenAI GPT/Codex-specific execution guidance.  Addresses known failure modes
 # where GPT models abandon work on partial results, skip prerequisite lookups,
 # hallucinate instead of using tools, and declare "done" without verification.
-# Inspired by patterns from OpenAI's GPT-5.4 prompting guide & OpenClaw PR #38953.
+# Inspired by OpenAI's GPT-5.4 prompting guide and internal tool-discipline iterations.
 OPENAI_MODEL_EXECUTION_GUIDANCE = (
     "# Execution discipline\n"
     "<tool_persistence>\n"
@@ -343,11 +343,6 @@ PLATFORM_HINTS = {
     "cli": (
         "You are a CLI AI Agent. Try not to use markdown but simple text "
         "renderable inside a terminal."
-    ),
-    "sms": (
-        "You are communicating via SMS. Keep responses concise and use plain text "
-        "only — no markdown, no formatting. SMS messages are limited to ~1600 "
-        "characters, so be brief and direct."
     ),
     "bluebubbles": (
         "You are chatting via iMessage (BlueBubbles). iMessage does not render "

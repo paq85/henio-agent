@@ -85,7 +85,6 @@ def build_channel_directory(adapters: Dict[Any, Any]) -> Dict[str, Any]:
         "whatsapp",
         "signal",
         "email",
-        "sms",
         "dingtalk",
         "feishu",
         "wecom",

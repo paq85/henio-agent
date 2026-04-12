@@ -820,7 +820,7 @@ def test_run_conversation_codex_continues_after_ack_stop_message(monkeypatch):
     agent = _build_agent(monkeypatch)
     responses = [
         _codex_ack_message_response(
-            "Absolutely — I can do that. I'll inspect ~/openclaw-studio and report back with a walkthrough."
+            "Absolutely — I can do that. I'll inspect ~/project-studio and report back with a walkthrough."
         ),
         _codex_tool_call_response(),
         _codex_message_response("Architecture summary complete."),
@@ -839,14 +839,14 @@ def test_run_conversation_codex_continues_after_ack_stop_message(monkeypatch):
 
     monkeypatch.setattr(agent, "_execute_tool_calls", _fake_execute_tool_calls)
 
-    result = agent.run_conversation("look into ~/openclaw-studio and tell me how it works")
+    result = agent.run_conversation("look into ~/project-studio and tell me how it works")
 
     assert result["completed"] is True
     assert result["final_response"] == "Architecture summary complete."
     assert any(
         msg.get("role") == "assistant"
         and msg.get("finish_reason") == "incomplete"
-        and "inspect ~/openclaw-studio" in (msg.get("content") or "")
+        and "inspect ~/project-studio" in (msg.get("content") or "")
         for msg in result["messages"]
     )
     assert any(

@@ -164,7 +164,6 @@ Cron job results can be delivered to any supported platform:
 | Matrix | `matrix` | Deliver to Matrix home room |
 | Mattermost | `mattermost` | Deliver to Mattermost home |
 | Email | `email` | Deliver via email |
-| SMS | `sms` | Deliver via SMS |
 | Home Assistant | `homeassistant` | Deliver to HA conversation |
 | DingTalk | `dingtalk` | Deliver to DingTalk |
 | Feishu | `feishu` | Deliver to Feishu |

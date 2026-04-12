@@ -127,7 +127,7 @@ TOOLSETS = {
     },
     
     "messaging": {
-        "description": "Cross-platform messaging: send messages to Telegram, Discord, Slack, SMS, etc.",
+        "description": "Cross-platform messaging: send messages to Telegram, Discord, Slack, email, and more.",
         "tools": ["send_message"],
         "includes": []
     },
@@ -359,12 +359,6 @@ TOOLSETS = {
         "includes": []
     },
 
-    "henio-sms": {
-        "description": "SMS bot toolset - interact with Henio via SMS (Twilio)",
-        "tools": _HENIO_CORE_TOOLS,
-        "includes": []
-    },
-
     "henio-webhook": {
         "description": "Webhook toolset - receive and process external webhook events",
         "tools": _HENIO_CORE_TOOLS,
@@ -374,7 +368,7 @@ TOOLSETS = {
     "henio-gateway": {
         "description": "Gateway toolset - union of all messaging platform tools",
         "tools": [],
-        "includes": ["henio-telegram", "henio-discord", "henio-whatsapp", "henio-slack", "henio-signal", "henio-bluebubbles", "henio-homeassistant", "henio-email", "henio-sms", "henio-mattermost", "henio-matrix", "henio-dingtalk", "henio-feishu", "henio-wecom", "henio-wecom-callback", "henio-weixin", "henio-webhook"]
+        "includes": ["henio-telegram", "henio-discord", "henio-whatsapp", "henio-slack", "henio-signal", "henio-bluebubbles", "henio-homeassistant", "henio-email", "henio-mattermost", "henio-matrix", "henio-dingtalk", "henio-feishu", "henio-wecom", "henio-wecom-callback", "henio-weixin", "henio-webhook"]
     }
 }
 
@@ -398,7 +392,6 @@ _PUBLIC_TOOLSET_ALIASES = {
     "henio-weixin": "henio-weixin",
     "henio-wecom": "henio-wecom",
     "henio-wecom-callback": "henio-wecom-callback",
-    "henio-sms": "henio-sms",
     "henio-webhook": "henio-webhook",
     "henio-gateway": "henio-gateway",
 }

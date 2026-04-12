@@ -33,14 +33,11 @@ Usage:
     henio honcho tokens --dialectic N     # Set dialectic result char cap
     henio honcho identity                 # Show AI peer identity representation
     henio honcho identity <file>          # Seed AI peer identity from a file (SOUL.md etc.)
-    henio honcho migrate                  # Step-by-step migration guide: OpenClaw native → Henio + Honcho
     henio version             Show version
     henio update              Update to latest version
     henio uninstall           Uninstall Henio Agent
     henio acp                 Run as an ACP server for editor integration
     henio sessions browse     Interactive session picker with search
-
-    henio claw migrate --dry-run  # Preview migration without changes
 """
 
 import argparse
@@ -5607,92 +5604,6 @@ For more help on a command:
             print(f"Error generating insights: {e}")
 
     insights_parser.set_defaults(func=cmd_insights)
-
-    # =========================================================================
-    # claw command (OpenClaw migration)
-    # =========================================================================
-    claw_parser = subparsers.add_parser(
-        "claw",
-        help="OpenClaw migration tools",
-        description="Migrate settings, memories, skills, and API keys from OpenClaw to Henio"
-    )
-    claw_subparsers = claw_parser.add_subparsers(dest="claw_action")
-
-    # claw migrate
-    claw_migrate = claw_subparsers.add_parser(
-        "migrate",
-        help="Migrate from OpenClaw to Henio",
-        description="Import settings, memories, skills, and API keys from an OpenClaw installation. "
-                    "Always shows a preview before making changes."
-    )
-    claw_migrate.add_argument(
-        "--source",
-        help="Path to OpenClaw directory (default: ~/.openclaw)"
-    )
-    claw_migrate.add_argument(
-        "--dry-run",
-        action="store_true",
-        help="Preview only — stop after showing what would be migrated"
-    )
-    claw_migrate.add_argument(
-        "--preset",
-        choices=["user-data", "full"],
-        default="full",
-        help="Migration preset (default: full). 'user-data' excludes secrets"
-    )
-    claw_migrate.add_argument(
-        "--overwrite",
-        action="store_true",
-        help="Overwrite existing files (default: skip conflicts)"
-    )
-    claw_migrate.add_argument(
-        "--migrate-secrets",
-        action="store_true",
-        help="Include allowlisted secrets (TELEGRAM_BOT_TOKEN, API keys, etc.)"
-    )
-    claw_migrate.add_argument(
-        "--workspace-target",
-        help="Absolute path to copy workspace instructions into"
-    )
-    claw_migrate.add_argument(
-        "--skill-conflict",
-        choices=["skip", "overwrite", "rename"],
-        default="skip",
-        help="How to handle skill name conflicts (default: skip)"
-    )
-    claw_migrate.add_argument(
-        "--yes", "-y",
-        action="store_true",
-        help="Skip confirmation prompts"
-    )
-
-    # claw cleanup
-    claw_cleanup = claw_subparsers.add_parser(
-        "cleanup",
-        aliases=["clean"],
-        help="Archive leftover OpenClaw directories after migration",
-        description="Scan for and archive leftover OpenClaw directories to prevent state fragmentation"
-    )
-    claw_cleanup.add_argument(
-        "--source",
-        help="Path to a specific OpenClaw directory to clean up"
-    )
-    claw_cleanup.add_argument(
-        "--dry-run",
-        action="store_true",
-        help="Preview what would be archived without making changes"
-    )
-    claw_cleanup.add_argument(
-        "--yes", "-y",
-        action="store_true",
-        help="Skip confirmation prompts"
-    )
-
-    def cmd_claw(args):
-        from henio_cli.claw import claw_command
-        claw_command(args)
-
-    claw_parser.set_defaults(func=cmd_claw)
 
     # =========================================================================
     # version command

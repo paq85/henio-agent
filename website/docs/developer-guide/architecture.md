@@ -118,7 +118,7 @@ henio-agent/
 │   ├── status.py             # Token locks, profile-scoped process tracking
 │   ├── builtin_hooks/        # Always-registered hooks
 │   └── platforms/            # 15 adapters: telegram, discord, slack, whatsapp,
-│                             #   signal, matrix, mattermost, email, sms,
+│                             #   signal, matrix, mattermost, email,
 │                             #   dingtalk, feishu, wecom, weixin, bluebubbles, homeassistant, webhook
 │
 ├── acp_adapter/              # ACP server (VS Code / Zed / JetBrains)

@@ -300,7 +300,7 @@ class TelegramAdapter(BasePlatformAdapter):
         # Exhausted retries — fatal
         message = (
             "Another process is already polling this Telegram bot token "
-            "(possibly OpenClaw or another Henio instance). "
+            "(possibly another Henio instance or Telegram poller). "
             "Henio stopped Telegram polling after %d retries. "
             "Only one poller can run per token — stop the other process "
             "and restart with 'henio start'."

@@ -197,7 +197,6 @@ When scheduling jobs, you specify where the output goes:
 | `"matrix"` | Matrix home room | |
 | `"mattermost"` | Mattermost home channel | |
 | `"email"` | Email | |
-| `"sms"` | SMS via Twilio | |
 | `"homeassistant"` | Home Assistant | |
 | `"dingtalk"` | DingTalk | |
 | `"feishu"` | Feishu/Lark | |

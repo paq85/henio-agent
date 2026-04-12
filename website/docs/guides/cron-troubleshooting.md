@@ -66,7 +66,6 @@ Delivery targets are case-sensitive and require the correct platform to be confi
 | `signal` | Signal gateway configured |
 | `matrix` | Matrix homeserver configured |
 | `email` | SMTP configured in `config.yaml` |
-| `sms` | SMS provider configured |
 | `local` | Write access to `~/.henio/cron/output/` |
 | `origin` | Delivers to the chat where the job was created |
 

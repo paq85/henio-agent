@@ -29,11 +29,11 @@ _FORWARD_COMPAT_TEMPLATE_MODELS: List[tuple[str, tuple[str, ...]]] = [
 
 
 def _add_forward_compat_models(model_ids: List[str]) -> List[str]:
-    """Add Clawdbot-style synthetic forward-compat Codex models.
+    """Add synthetic forward-compat Codex models.
 
     If a newer Codex slug isn't returned by live discovery, surface it when an
-    older compatible template model is present. This mirrors Clawdbot's
-    synthetic catalog / forward-compat behavior for GPT-5 Codex variants.
+    older compatible template model is present. This mirrors the synthetic
+    forward-compat catalog behavior used for GPT-5 Codex variants.
     """
     ordered: List[str] = []
     seen: set[str] = set()

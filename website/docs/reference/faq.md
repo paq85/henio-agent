@@ -611,7 +611,7 @@ See [Subagent Delegation](../user-guide/features/delegation.md) for more on how 
 
 ### Running multiple agents on one WhatsApp number (per-chat binding)
 
-**Scenario:** In OpenClaw, you had multiple independent agents bound to specific WhatsApp chats — one for a family shopping list group, another for your private chat. Can Henio do this?
+**Scenario:** You want multiple independent agents bound to specific WhatsApp chats — one for a family shopping list group, another for your private chat. Can Henio do this?
 
 **Current limitation:** Henio profiles each require their own WhatsApp number/session. You cannot bind multiple profiles to different chats on the same WhatsApp number — the WhatsApp bridge (Baileys) uses one authenticated session per number.
 

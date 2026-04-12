@@ -1121,7 +1121,7 @@ def convert_messages_to_anthropic(
     # assistant message — the third-party will generate its own
     # thinking blocks if it supports extended thinking.
     #
-    # For direct Anthropic (strategy following clawdbot/OpenClaw):
+    # For direct Anthropic (strategy used by earlier Anthropic integrations):
     # 1. Strip thinking/redacted_thinking from all assistant messages
     #    EXCEPT the last one — preserves reasoning continuity on the
     #    current tool-use chain while avoiding stale signature errors.

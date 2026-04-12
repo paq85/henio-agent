@@ -40,7 +40,6 @@ Each session is tagged with its source platform:
 | `matrix` | Matrix rooms and DMs |
 | `mattermost` | Mattermost channels |
 | `email` | Email (IMAP/SMTP) |
-| `sms` | SMS via Twilio |
 | `dingtalk` | DingTalk messenger |
 | `feishu` | Feishu/Lark messenger |
 | `wecom` | WeCom (WeChat Work) |

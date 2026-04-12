@@ -57,7 +57,6 @@ henio tools         # Configure which tools are enabled
 henio config set    # Set individual config values
 henio gateway       # Start the messaging gateway (Telegram, Discord, etc.)
 henio setup         # Run the full setup wizard (configures everything at once)
-henio claw migrate  # Migrate from OpenClaw (if coming from OpenClaw)
 henio update        # Update to the latest version
 henio doctor        # Diagnose any issues
 ```
@@ -105,35 +104,6 @@ All documentation lives at **[Henio Agent Docs](https://paq85.github.io/henio-ag
 | [Contributing](https://paq85.github.io/henio-agent/docs/developer-guide/contributing) | Development setup, PR process, code style |
 | [CLI Reference](https://paq85.github.io/henio-agent/docs/reference/cli-commands) | All commands and flags |
 | [Environment Variables](https://paq85.github.io/henio-agent/docs/reference/environment-variables) | Complete env var reference |
-
----
-
-## Migrating from OpenClaw
-
-If you're coming from OpenClaw, Henio can automatically import your settings, memories, skills, and API keys.
-
-**During first-time setup:** The setup wizard (`henio setup`) automatically detects `~/.openclaw` and offers to migrate before configuration begins.
-
-**Anytime after install:**
-
-```bash
-henio claw migrate               # Interactive migration (full preset)
-henio claw migrate --dry-run     # Preview what would be migrated
-henio claw migrate --preset user-data    # Migrate without secrets
-henio claw migrate --overwrite   # Overwrite existing conflicts
-```
-
-What gets imported:
-- **SOUL.md** — persona file
-- **Memories** — MEMORY.md and USER.md entries
-- **Skills** — user-created skills → `~/.henio/skills/openclaw-imports/`
-- **Command allowlist** — approval patterns
-- **Messaging settings** — platform configs, allowed users, working directory
-- **API keys** — allowlisted secrets (Telegram, OpenRouter, OpenAI, Anthropic, ElevenLabs)
-- **TTS assets** — workspace audio files
-- **Workspace instructions** — AGENTS.md (with `--workspace-target`)
-
-See `henio claw migrate --help` for all options, or use the `openclaw-migration` skill for an interactive agent-guided migration with dry-run previews.
 
 ---
 

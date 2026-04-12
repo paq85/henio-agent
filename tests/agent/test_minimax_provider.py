@@ -249,8 +249,7 @@ class TestMinimaxApiMode:
 class TestMinimaxMaxOutput:
     """Verify _get_anthropic_max_output returns correct limits for MiniMax models.
 
-    MiniMax max output is 131,072 tokens (source: OpenClaw model definitions,
-    cross-referenced with MiniMax API behavior).
+    MiniMax max output is 131,072 tokens (cross-referenced with MiniMax API behavior).
     """
 
     def test_minimax_m27_output_limit(self):

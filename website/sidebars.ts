@@ -94,7 +94,6 @@ const sidebars: SidebarsConfig = {
         'user-guide/messaging/whatsapp',
         'user-guide/messaging/signal',
         'user-guide/messaging/email',
-        'user-guide/messaging/sms',
         'user-guide/messaging/homeassistant',
         'user-guide/messaging/mattermost',
         'user-guide/messaging/matrix',
@@ -141,7 +140,6 @@ const sidebars: SidebarsConfig = {
         'guides/cron-troubleshooting',
         'guides/work-with-skills',
         'guides/delegation-patterns',
-        'guides/migrate-from-openclaw',
       ],
     },
     {

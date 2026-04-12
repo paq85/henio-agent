@@ -74,7 +74,7 @@ For bot mode, you need a phone number that isn't already registered with WhatsAp
 
 | Option | Cost | Notes |
 |--------|------|-------|
-| **Google Voice** | Free | US only. Get a number at [voice.google.com](https://voice.google.com). Verify WhatsApp via SMS through the Google Voice app. |
+| **Google Voice** | Free | US only. Get a number at [voice.google.com](https://voice.google.com). Use the Google Voice app for WhatsApp verification. |
 | **Prepaid SIM** | $5–15 one-time | Any carrier. Activate, verify WhatsApp, then the SIM can sit in a drawer. Number must stay active (make a call every 90 days). |
 | **VoIP services** | Free–$5/month | TextNow, TextFree, or similar. Some VoIP numbers are blocked by WhatsApp — try a few if the first doesn't work. |
 

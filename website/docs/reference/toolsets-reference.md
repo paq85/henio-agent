@@ -98,7 +98,6 @@ Platform toolsets define the complete tool configuration for a deployment target
 | `henio-matrix` | Same as `henio-cli`. |
 | `henio-mattermost` | Same as `henio-cli`. |
 | `henio-email` | Same as `henio-cli`. |
-| `henio-sms` | Same as `henio-cli`. |
 | `henio-dingtalk` | Same as `henio-cli`. |
 | `henio-feishu` | Same as `henio-cli`. |
 | `henio-wecom` | Same as `henio-cli`. |
