@@ -248,7 +248,7 @@ def _has_any_provider_configured() -> bool:
     except Exception:
         pass
 
-    # Check for Nous Portal OAuth credentials
+    # Check for Henio Portal OAuth credentials
     auth_file = get_henio_home() / "auth.json"
     if auth_file.exists():
         try:
@@ -1033,7 +1033,7 @@ def select_provider_and_model(args=None):
 
     provider_labels = {
         "openrouter": "OpenRouter",
-        "nous": "Nous Portal",
+        "nous": "Henio Portal",
         "openai-codex": "OpenAI Codex",
         "qwen-oauth": "Qwen OAuth",
         "copilot-acp": "GitHub Copilot ACP",
@@ -1062,7 +1062,7 @@ def select_provider_and_model(args=None):
 
     # Step 1: Provider selection — top providers shown first, rest behind "More..."
     top_providers = [
-        ("nous", "Nous Portal (Nous Research subscription)"),
+        ("nous", "Henio Portal (subscription)"),
         ("openrouter", "OpenRouter (100+ models, pay-per-use)"),
         ("anthropic", "Anthropic (Claude models — API key or Claude Code)"),
         ("openai-codex", "OpenAI Codex"),
@@ -1325,7 +1325,7 @@ def _model_flow_openrouter(config, current_model=""):
 
 
 def _model_flow_nous(config, current_model="", args=None):
-    """Nous Portal provider: ensure logged in, then pick model."""
+    """Henio Portal provider: ensure logged in, then pick model."""
     from henio_cli.auth import (
         get_provider_auth_state, _prompt_model_selection, _save_model_choice,
         _update_config_for_provider, resolve_nous_runtime_credentials,
@@ -1341,7 +1341,7 @@ def _model_flow_nous(config, current_model="", args=None):
 
     state = get_provider_auth_state("nous")
     if not state or not state.get("access_token"):
-        print("Not logged into Nous Portal. Starting login...")
+        print("Not logged into Henio Portal. Starting login...")
         print()
         try:
             mock_args = argparse.Namespace(
@@ -1376,7 +1376,7 @@ def _model_flow_nous(config, current_model="", args=None):
     )
     model_ids = _PROVIDER_MODELS.get("nous", [])
     if not model_ids:
-        print("No curated models available for Nous Portal.")
+        print("No curated models available for Henio Portal.")
         return
 
     # Verify credentials are still valid (catches expired sessions early)
@@ -1387,7 +1387,7 @@ def _model_flow_nous(config, current_model="", args=None):
         msg = format_auth_error(exc) if isinstance(exc, AuthError) else str(exc)
         if relogin:
             print(f"Session expired: {msg}")
-            print("Re-authenticating with Nous Portal...\n")
+            print("Re-authenticating with Henio Portal...\n")
             try:
                 mock_args = argparse.Namespace(
                     portal_url=None, inference_url=None, client_id=None,
@@ -1416,7 +1416,7 @@ def _model_flow_nous(config, current_model="", args=None):
         model_ids, unavailable_models = partition_nous_models_by_tier(model_ids, pricing, free_tier=True)
 
     if not model_ids and not unavailable_models:
-        print("No models available for Nous Portal after filtering.")
+        print("No models available for Henio Portal after filtering.")
         return
 
     # Resolve portal URL for upgrade links (may differ on staging)
@@ -1467,9 +1467,9 @@ def _model_flow_nous(config, current_model="", args=None):
             save_env_value("OPENAI_API_KEY", "")
         changed_defaults = apply_nous_provider_defaults(config)
         save_config(config)
-        print(f"Default model set to: {selected} (via Nous Portal)")
+        print(f"Default model set to: {selected} (via Henio Portal)")
         if "tts" in changed_defaults:
-            print("TTS provider set to: OpenAI TTS via your Nous subscription")
+            print("TTS provider set to: OpenAI TTS via your Henio subscription")
         else:
             current_tts = str(config.get("tts", {}).get("provider") or "edge")
             if current_tts.lower() not in {"", "edge"}:
@@ -4812,7 +4812,7 @@ For more help on a command:
     auth_add.add_argument("--type", dest="auth_type", choices=["oauth", "api-key", "api_key"], help="Credential type to add")
     auth_add.add_argument("--label", help="Optional display label")
     auth_add.add_argument("--api-key", help="API key value (otherwise prompted securely)")
-    auth_add.add_argument("--portal-url", help="Nous portal base URL")
+    auth_add.add_argument("--portal-url", help="Henio portal base URL")
     auth_add.add_argument("--inference-url", help="Nous inference base URL")
     auth_add.add_argument("--client-id", help="OAuth client id")
     auth_add.add_argument("--scope", help="OAuth scope override")

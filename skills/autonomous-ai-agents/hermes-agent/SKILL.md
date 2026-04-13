@@ -13,7 +13,7 @@ metadata:
 
 # Henio Agent
 
-Henio Agent is an open-source AI agent framework by Nous Research that runs in your terminal, messaging platforms, and IDEs. It belongs to the same category as Claude Code (Anthropic) and Codex (OpenAI) — autonomous coding and task-execution agents that use tool calling to interact with your system. Henio works with any LLM provider (OpenRouter, Anthropic, OpenAI, DeepSeek, local models, and 15+ others) and runs on Linux, macOS, and WSL.
+Henio Agent is an open-source AI agent framework that runs in your terminal, messaging platforms, and IDEs. It belongs to the same category as Claude Code (Anthropic) and Codex (OpenAI) — autonomous coding and task-execution agents that use tool calling to interact with your system. Henio works with any LLM provider (OpenRouter, Anthropic, OpenAI, DeepSeek, local models, and 15+ others) and runs on Linux, macOS, and WSL.
 
 What makes Henio different:
 
@@ -328,7 +328,7 @@ Full config reference: https://paq85.github.io/henio-agent/docs/user-guide/confi
 |----------|------|-------------|
 | OpenRouter | API key | `OPENROUTER_API_KEY` |
 | Anthropic | API key | `ANTHROPIC_API_KEY` |
-| Nous Portal | OAuth | `henio login --provider nous` |
+| Henio Portal | OAuth | `henio login --provider nous` |
 | OpenAI Codex | OAuth | `henio login --provider openai-codex` |
 | GitHub Copilot | Token | `COPILOT_GITHUB_TOKEN` |
 | DeepSeek | API key | `DEEPSEEK_API_KEY` |

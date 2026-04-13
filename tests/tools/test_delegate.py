@@ -658,7 +658,7 @@ class TestDelegationCredentialResolution(unittest.TestCase):
 
     @patch("henio_cli.runtime_provider.resolve_runtime_provider")
     def test_nous_provider_resolves_nous_credentials(self, mock_resolve):
-        """Nous provider resolves Nous Portal base_url and api_key."""
+        """Henio provider resolves Henio Portal base_url and api_key."""
         mock_resolve.return_value = {
             "provider": "nous",
             "base_url": "https://inference-api.nousresearch.com/v1",

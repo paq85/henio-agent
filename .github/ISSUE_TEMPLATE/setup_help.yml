@@ -12,7 +12,7 @@ body:
         - Run `henio doctor` and include the output below
         - Try `henio update` to get the latest version
         - Check the [README troubleshooting section](https://github.com/paq85/henio-agent#troubleshooting)
-        - For general questions, consider the [Nous Research Discord](https://discord.gg/NousResearch) for faster help
+        - For general questions, consider [GitHub Discussions](https://github.com/paq85/henio-agent/discussions) for faster help
 
   - type: textarea
     id: description
@@ -20,7 +20,7 @@ body:
       label: What's Going Wrong?
       description: Describe what you're trying to do and where it fails.
       placeholder: |
-        I ran `henio setup` and selected Nous Portal, but when I try to
+        I ran `henio setup` and selected Henio Portal, but when I try to
         start the gateway I get...
     validations:
       required: true

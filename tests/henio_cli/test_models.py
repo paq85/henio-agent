@@ -190,7 +190,7 @@ class TestDetectProviderForModel:
 
 
 class TestFilterNousFreeModels:
-    """Tests for filter_nous_free_models — Nous Portal free-model policy."""
+    """Tests for filter_nous_free_models — Henio Portal free-model policy."""
 
     _PAID = {"prompt": "0.000003", "completion": "0.000015"}
     _FREE = {"prompt": "0", "completion": "0"}

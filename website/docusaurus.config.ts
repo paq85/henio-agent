@@ -116,8 +116,8 @@ const config: Config = {
         {
           title: 'Community',
           items: [
-            { label: 'Discord', href: 'https://discord.gg/NousResearch' },
-            { label: 'GitHub Discussions', href: 'https://github.com/paq85/henio-agent/discussions' },
+            { label: 'Community Discussions', href: 'https://github.com/paq85/henio-agent/discussions' },
+            { label: 'Issue Tracker', href: 'https://github.com/paq85/henio-agent/issues' },
             { label: 'Skills Hub', href: 'https://agentskills.io' },
           ],
         },
@@ -125,11 +125,11 @@ const config: Config = {
           title: 'More',
           items: [
             { label: 'GitHub', href: 'https://github.com/paq85/henio-agent' },
-            { label: 'Nous Research', href: 'https://nousresearch.com' },
+            { label: 'Project Home', href: 'https://paq85.github.io/henio-agent/' },
           ],
         },
       ],
-      copyright: `Henio Agent · MIT License · Initially forked from <a href="https://github.com/NousResearch/hermes-agent">Hermes Agent</a> (MIT) by <a href="https://nousresearch.com">Nous Research</a> · ${new Date().getFullYear()}`,
+      copyright: `Henio Agent · MIT License · Initially forked from <a href="https://github.com/NousResearch/hermes-agent">Hermes Agent</a> (MIT) · ${new Date().getFullYear()}`,
     },
     prism: {
       theme: prismThemes.github,

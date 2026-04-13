@@ -289,9 +289,9 @@ _PROVIDER_MODELS: dict[str, list[str]] = {
 }
 
 # ---------------------------------------------------------------------------
-# Nous Portal free-model filtering
+# Henio Portal free-model filtering
 # ---------------------------------------------------------------------------
-# Models that are ALLOWED to appear when priced as free on Nous Portal.
+# Models that are ALLOWED to appear when priced as free on Henio Portal.
 # Any other free model is hidden — prevents promotional/temporary free models
 # from cluttering the selection when users are paying subscribers.
 # Models in this list are ALSO filtered out if they are NOT free (i.e. they
@@ -317,7 +317,7 @@ def filter_nous_free_models(
     model_ids: list[str],
     pricing: dict[str, dict[str, str]],
 ) -> list[str]:
-    """Filter the Nous Portal model list according to free-model policy.
+    """Filter the Henio Portal model list according to free-model policy.
 
     Rules:
       • Paid models that are NOT in the allowlist → keep (normal case).
@@ -343,11 +343,11 @@ def filter_nous_free_models(
 
 
 # ---------------------------------------------------------------------------
-# Nous Portal account tier detection
+# Henio Portal account tier detection
 # ---------------------------------------------------------------------------
 
 def fetch_nous_account_tier(access_token: str, portal_base_url: str = "") -> dict[str, Any]:
-    """Fetch the user's Nous Portal account/subscription info.
+    """Fetch the user's Henio Portal account/subscription info.
 
     Calls ``<portal>/api/oauth/account`` with the OAuth access token.
 
@@ -436,7 +436,7 @@ _free_tier_cache: tuple[bool, float] | None = None  # (result, timestamp)
 
 
 def check_nous_free_tier() -> bool:
-    """Check if the current Nous Portal user is on a free (unpaid) tier.
+    """Check if the current Henio Portal user is on a free (unpaid) tier.
 
     Results are cached for ``_FREE_TIER_CACHE_TTL`` seconds to avoid
     hitting the Portal API on every call.  The cache is short-lived so
@@ -482,7 +482,7 @@ _PROVIDER_LABELS = {
     "openrouter": "OpenRouter",
     "openai-codex": "OpenAI Codex",
     "copilot-acp": "GitHub Copilot ACP",
-    "nous": "Nous Portal",
+    "nous": "Henio Portal",
     "copilot": "GitHub Copilot",
     "gemini": "Google AI Studio",
     "zai": "Z.AI / GLM",
@@ -728,7 +728,7 @@ def fetch_models_with_pricing(
     """Fetch ``/v1/models`` and return ``{model_id: {prompt, completion}}`` pricing.
 
     Results are cached per *base_url* so repeated calls are free.
-    Works with any OpenRouter-compatible endpoint (OpenRouter, Nous Portal).
+    Works with any OpenRouter-compatible endpoint (OpenRouter, Henio Portal).
     """
     cache_key = (base_url or "").rstrip("/")
     if not force_refresh and cache_key in _pricing_cache:
@@ -772,7 +772,7 @@ def _resolve_openrouter_api_key() -> str:
 
 
 def _resolve_nous_pricing_credentials() -> tuple[str, str]:
-    """Return ``(api_key, base_url)`` for Nous Portal pricing, or empty strings."""
+    """Return ``(api_key, base_url)`` for Henio Portal pricing, or empty strings."""
     try:
         from henio_cli.auth import resolve_nous_runtime_credentials
         creds = resolve_nous_runtime_credentials()
@@ -1186,7 +1186,7 @@ def provider_model_ids(provider: Optional[str], *, force_refresh: bool = False) 
         if normalized == "copilot-acp":
             return list(_PROVIDER_MODELS.get("copilot", []))
     if normalized == "nous":
-        # Try live Nous Portal /models endpoint
+        # Try live Henio Portal /models endpoint
         try:
             from henio_cli.auth import fetch_nous_models, resolve_nous_runtime_credentials
             creds = resolve_nous_runtime_credentials()

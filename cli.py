@@ -1409,8 +1409,8 @@ def _build_compact_banner() -> str:
     dim_color = _skin.get_color("banner_dim", "#B8860B") if _skin else "#B8860B"
 
     if skin_name == "default":
-        line1 = "⚕ NOUS HENIO - AI Agent Framework"
-        tiny_line = "⚕ NOUS HENIO"
+        line1 = "⚕ HENIO AGENT - AI Agent Framework"
+        tiny_line = "⚕ HENIO AGENT"
     else:
         agent_name = _skin.get_branding("agent_name", "Henio Agent") if _skin else "Henio Agent"
         line1 = f"{agent_name} - AI Agent Framework"
@@ -1420,7 +1420,7 @@ def _build_compact_banner() -> str:
 
     w = min(shutil.get_terminal_size().columns - 2, 88)
     if w < 30:
-        return f"\n[{title_color}]{tiny_line}[/] [dim {dim_color}]- Nous Research[/]\n"
+        return f"\n[{title_color}]{tiny_line}[/] [dim {dim_color}]- Henio Agent[/]\n"
 
     inner = w - 2  # inside the box border
     bar = "═" * w
@@ -2982,12 +2982,12 @@ class HenioCLI:
                     "[dim]   Fix: Set model.context_length in config.yaml, or increase your server's context setting[/]"
                 )
 
-        # Warn if the configured model is a Nous Henio LLM (not agentic)
+            # Warn if the configured model is a Henio-hosted LLM (not agentic)
         model_name = getattr(self, "model", "") or ""
         if "henio" in model_name.lower():
             self.console.print()
             self.console.print(
-                "[bold yellow]⚠  Nous Research Henio 3 & 4 models are NOT agentic and are not "
+                "[bold yellow]⚠  Henio 3 & 4 models are NOT agentic and are not "
                 "designed for use with Henio Agent.[/]"
             )
             self.console.print(

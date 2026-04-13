@@ -335,13 +335,13 @@ def test_model_flow_nous_prints_subscription_guidance_without_mutating_explicit_
     monkeypatch.setattr("henio_cli.auth._update_config_for_provider", lambda provider, url: None)
     monkeypatch.setattr(
         "henio_cli.nous_subscription.get_nous_subscription_explainer_lines",
-        lambda: ["Nous subscription enables managed web tools."],
+        lambda: ["Henio subscription enables managed web tools."],
     )
 
     henio_main._model_flow_nous(config, current_model="claude-opus-4-6")
 
     out = capsys.readouterr().out
-    assert "Nous subscription enables managed web tools." in out
+    assert "Henio subscription enables managed web tools." in out
     assert config["tts"]["provider"] == "elevenlabs"
     assert config["browser"]["cloud_provider"] == "browser-use"
 
@@ -373,14 +373,14 @@ def test_model_flow_nous_applies_managed_tts_default_when_unconfigured(monkeypat
     monkeypatch.setattr("henio_cli.auth._update_config_for_provider", lambda provider, url: None)
     monkeypatch.setattr(
         "henio_cli.nous_subscription.get_nous_subscription_explainer_lines",
-        lambda: ["Nous subscription enables managed web tools."],
+        lambda: ["Henio subscription enables managed web tools."],
     )
 
     henio_main._model_flow_nous(config, current_model="claude-opus-4-6")
 
     out = capsys.readouterr().out
-    assert "Nous subscription enables managed web tools." in out
-    assert "OpenAI TTS via your Nous subscription" in out
+    assert "Henio subscription enables managed web tools." in out
+    assert "OpenAI TTS via your Henio subscription" in out
     assert config["tts"]["provider"] == "openai"
 
 

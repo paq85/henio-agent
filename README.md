@@ -6,14 +6,14 @@
 
 <p align="center">
   <a href="https://paq85.github.io/henio-agent/docs/"><img src="https://img.shields.io/badge/Docs-Henio%20Docs-FFD700?style=for-the-badge" alt="Documentation"></a>
-  <a href="https://discord.gg/NousResearch"><img src="https://img.shields.io/badge/Discord-5865F2?style=for-the-badge&logo=discord&logoColor=white" alt="Discord"></a>
+  <a href="https://github.com/paq85/henio-agent/discussions"><img src="https://img.shields.io/badge/Community-Discussions-5865F2?style=for-the-badge&logo=github&logoColor=white" alt="Community Discussions"></a>
   <a href="https://github.com/paq85/henio-agent/blob/main/LICENSE"><img src="https://img.shields.io/badge/License-MIT-green?style=for-the-badge" alt="License: MIT"></a>
   <a href="https://github.com/NousResearch/hermes-agent"><img src="https://img.shields.io/badge/Origin-Hermes%20Agent%20(MIT)-blueviolet?style=for-the-badge" alt="Initially forked from Hermes Agent (MIT)"></a>
 </p>
 
-**The self-improving AI agent initially forked from [Hermes Agent](https://github.com/NousResearch/hermes-agent), an MIT-licensed project by [Nous Research](https://nousresearch.com).** It's the only agent with a built-in learning loop — it creates skills from experience, improves them during use, nudges itself to persist knowledge, searches its own past conversations, and builds a deepening model of who you are across sessions. Run it on a $5 VPS, a GPU cluster, or serverless infrastructure that costs nearly nothing when idle. It's not tied to your laptop — talk to it from Telegram while it works on a cloud VM.
+**The self-improving AI agent initially forked from the MIT-licensed [Hermes Agent](https://github.com/NousResearch/hermes-agent) project.** It's the only agent with a built-in learning loop — it creates skills from experience, improves them during use, nudges itself to persist knowledge, searches its own past conversations, and builds a deepening model of who you are across sessions. Run it on a $5 VPS, a GPU cluster, or serverless infrastructure that costs nearly nothing when idle. It's not tied to your laptop — talk to it from Telegram while it works on a cloud VM.
 
-Use any model you want — [Nous Portal](https://portal.nousresearch.com), [OpenRouter](https://openrouter.ai) (200+ models), [z.ai/GLM](https://z.ai), [Kimi/Moonshot](https://platform.moonshot.ai), [MiniMax](https://www.minimax.io), OpenAI, or your own endpoint. Switch with `henio model` — no code changes, no lock-in.
+Use any model you want — [Henio Portal](https://portal.nousresearch.com), [OpenRouter](https://openrouter.ai) (200+ models), [z.ai/GLM](https://z.ai), [Kimi/Moonshot](https://platform.moonshot.ai), [MiniMax](https://www.minimax.io), OpenAI, or your own endpoint. Switch with `henio model` — no code changes, no lock-in.
 
 <table>
 <tr><td><b>A real terminal interface</b></td><td>Full TUI with multiline editing, slash-command autocomplete, conversation history, interrupt-and-redirect, and streaming tool output.</td></tr>
@@ -127,7 +127,7 @@ python -m pytest tests/ -q
 
 ## Community
 
-- 💬 [Discord](https://discord.gg/NousResearch)
+- 💬 [GitHub Discussions](https://github.com/paq85/henio-agent/discussions)
 - 📚 [Skills Hub](https://agentskills.io)
 - 🐛 [Issues](https://github.com/paq85/henio-agent/issues)
 - 💡 [Discussions](https://github.com/paq85/henio-agent/discussions)
@@ -138,4 +138,4 @@ python -m pytest tests/ -q
 
 MIT — see [LICENSE](LICENSE).
 
-Henio Agent remains MIT licensed and was initially forked from [Hermes Agent](https://github.com/NousResearch/hermes-agent), which is also licensed under the MIT License.
+Henio Agent remains MIT licensed and was initially forked from the [Hermes Agent](https://github.com/NousResearch/hermes-agent) project, which is also licensed under the MIT License.

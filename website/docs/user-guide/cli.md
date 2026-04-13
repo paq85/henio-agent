@@ -21,7 +21,7 @@ henio chat -q "Hello"
 henio chat --model "anthropic/claude-sonnet-4"
 
 # With a specific provider
-henio chat --provider nous        # Use Nous Portal
+henio chat --provider nous        # Use Henio Portal
 henio chat --provider openrouter  # Force OpenRouter
 
 # With specific toolsets

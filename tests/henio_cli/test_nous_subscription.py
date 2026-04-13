@@ -1,4 +1,4 @@
-"""Tests for Nous subscription feature detection."""
+"""Tests for Henio subscription feature detection."""
 
 from henio_cli import nous_subscription as ns
 

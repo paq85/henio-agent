@@ -309,7 +309,7 @@ class TestTryActivateFallback:
             assert agent._fallback_activated is False
 
     def test_activates_nous_fallback(self):
-        """Nous Portal fallback should use OAuth credentials and chat_completions mode."""
+        """Henio Portal fallback should use OAuth credentials and chat_completions mode."""
         agent = _make_agent(
             fallback_model={"provider": "nous", "model": "nous-henio-3"},
         )

@@ -1,4 +1,4 @@
-"""Helpers for Nous subscription managed-tool capabilities."""
+"""Helpers for Henio subscription managed-tool capabilities."""
 
 from __future__ import annotations
 
@@ -390,7 +390,7 @@ def get_nous_subscription_features(
             managed_by_nous=image_managed,
             direct_override=image_active and not image_managed,
             toolset_enabled=image_tool_enabled,
-            current_provider="FAL" if direct_fal else ("Nous Subscription" if image_managed else ""),
+            current_provider="FAL" if direct_fal else ("Henio Subscription" if image_managed else ""),
             explicit_configured=direct_fal,
         ),
         "tts": NousFeatureState(
@@ -444,8 +444,8 @@ def get_nous_subscription_explainer_lines() -> list[str]:
         return []
 
     return [
-        "Nous subscription enables managed web tools, image generation, OpenAI TTS, and browser automation by default.",
-        "Those managed tools bill to your Nous subscription. Modal execution is optional and can bill to your subscription too.",
+        "Henio subscription enables managed web tools, image generation, OpenAI TTS, and browser automation by default.",
+        "Those managed tools bill to your Henio subscription. Modal execution is optional and can bill to your subscription too.",
         "Change these later with: henio setup tools, henio setup terminal, or henio status.",
     ]
 

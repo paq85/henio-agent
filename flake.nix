@@ -1,5 +1,5 @@
 {
-  description = "Henio Agent - AI agent framework by Nous Research";
+  description = "Henio Agent - AI agent framework";
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";

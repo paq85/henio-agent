@@ -51,7 +51,7 @@ logger = logging.getLogger(__name__)
 # ---------------------------------------------------------------------------
 
 _HENIO_MODEL_WARNING = (
-    "Nous Research Henio 3 & 4 models are NOT agentic and are not designed "
+    "Henio 3 & 4 models are NOT agentic and are not designed "
     "for use with Henio Agent. They lack the tool-calling capabilities "
     "required for agent workflows. Consider using an agentic model instead "
     "(Claude, GPT, Gemini, DeepSeek, etc.)."

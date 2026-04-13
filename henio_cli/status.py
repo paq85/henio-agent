@@ -162,7 +162,7 @@ def show_status(args):
 
     nous_logged_in = bool(nous_status.get("logged_in"))
     print(
-        f"  {'Nous Portal':<12}  {check_mark(nous_logged_in)} "
+        f"  {'Henio Portal':<12}  {check_mark(nous_logged_in)} "
         f"{'logged in' if nous_logged_in else 'not logged in (run: henio model)'}"
     )
     if nous_logged_in:
@@ -205,19 +205,19 @@ def show_status(args):
         print(f"    Error:      {qwen_status.get('error')}")
 
     # =========================================================================
-    # Nous Subscription Features
+    # Henio Subscription Features
     # =========================================================================
     if managed_nous_tools_enabled():
         features = get_nous_subscription_features(config)
         print()
-        print(color("◆ Nous Subscription Features", Colors.CYAN, Colors.BOLD))
+        print(color("◆ Henio Subscription Features", Colors.CYAN, Colors.BOLD))
         if not features.nous_auth_present:
-            print("  Nous Portal   ✗ not logged in")
+            print("  Henio Portal  ✗ not logged in")
         else:
-            print("  Nous Portal   ✓ managed tools available")
+            print("  Henio Portal  ✓ managed tools available")
         for feature in features.items():
             if feature.managed_by_nous:
-                state = "active via Nous subscription"
+                state = "active via Henio subscription"
             elif feature.active:
                 current = feature.current_provider or "configured provider"
                 state = f"active via {current}"

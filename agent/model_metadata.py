@@ -882,7 +882,7 @@ def _query_anthropic_context_length(model: str, base_url: str, api_key: str) -> 
 
 
 def _resolve_nous_context_length(model: str) -> Optional[int]:
-    """Resolve Nous Portal model context length via OpenRouter metadata.
+    """Resolve Henio Portal model context length via OpenRouter metadata.
 
     Nous model IDs are bare (e.g. 'claude-opus-4-6') while OpenRouter uses
     prefixed IDs (e.g. 'anthropic/claude-opus-4.6'). Try suffix matching

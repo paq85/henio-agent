@@ -6134,7 +6134,7 @@ class AIAgent:
             # model has adequate output budget for tool calls.
             api_kwargs.update(self._max_tokens_param(65536))
         elif (self._is_openrouter_url() or "nousresearch" in self._base_url_lower) and "claude" in (self.model or "").lower():
-            # OpenRouter and Nous Portal translate requests to Anthropic's
+            # OpenRouter and the Henio provider translate requests to Anthropic's
             # Messages API, which requires max_tokens as a mandatory field.
             # When we omit it, the proxy picks a default that can be too
             # low — the model spends its output budget on thinking and has
@@ -6158,7 +6158,7 @@ class AIAgent:
 
         # Provider preferences (only, ignore, order, sort) are OpenRouter-
         # specific.  Only send to OpenRouter-compatible endpoints.
-        # TODO: Nous Portal will add transparent proxy support — re-enable
+        # TODO: If the Henio provider adds transparent proxy support, re-enable
         # for _is_nous when their backend is updated.
         if provider_preferences and _is_openrouter:
             extra_body["provider"] = provider_preferences
@@ -6172,7 +6172,7 @@ class AIAgent:
             else:
                 if self.reasoning_config is not None:
                     rc = dict(self.reasoning_config)
-                    # Nous Portal requires reasoning enabled — don't send
+                    # The Henio provider requires reasoning enabled — don't send
                     # enabled=false to it (would cause 400).
                     if _is_nous and rc.get("enabled") is False:
                         pass  # omit reasoning entirely for Nous when disabled
@@ -6184,7 +6184,7 @@ class AIAgent:
                         "effort": "medium"
                     }
 
-        # Nous Portal product attribution
+        # Henio provider product attribution
         if _is_nous:
             extra_body["tags"] = ["product=henio-agent"]
 
@@ -6221,7 +6221,7 @@ class AIAgent:
 
         OpenRouter forwards unknown extra_body fields to upstream providers.
         Some providers/routes reject `reasoning` with 400s, so gate it to
-        known reasoning-capable model families and direct Nous Portal.
+        known reasoning-capable model families and the direct Henio provider.
         """
         if "nousresearch" in self._base_url_lower:
             return True

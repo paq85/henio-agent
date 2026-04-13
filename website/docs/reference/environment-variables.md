@@ -68,7 +68,7 @@ For native Anthropic auth, Henio prefers Claude Code's own credential files when
 | Variable | Description |
 |----------|-------------|
 | `HENIO_INFERENCE_PROVIDER` | Override provider selection: `auto`, `openrouter`, `nous`, `openai-codex`, `copilot`, `copilot-acp`, `anthropic`, `huggingface`, `zai`, `kimi-coding`, `minimax`, `minimax-cn`, `kilocode`, `xiaomi`, `alibaba`, `deepseek`, `opencode-zen`, `opencode-go`, `ai-gateway` (default: `auto`) |
-| `HENIO_PORTAL_BASE_URL` | Override Nous Portal URL (for development/testing) |
+| `HENIO_PORTAL_BASE_URL` | Override Henio Portal URL (for development/testing) |
 | `NOUS_INFERENCE_BASE_URL` | Override Nous inference API URL |
 | `HENIO_NOUS_MIN_KEY_TTL_SECONDS` | Min agent key TTL before re-mint (default: 1800 = 30min) |
 | `HENIO_NOUS_TIMEOUT_SECONDS` | HTTP timeout for Nous credential / token flows |

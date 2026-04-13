@@ -297,7 +297,7 @@ def test_visible_providers_include_nous_subscription_when_logged_in(monkeypatch)
 
     providers = _visible_providers(TOOL_CATEGORIES["browser"], config)
 
-    assert providers[0]["name"].startswith("Nous Subscription")
+    assert providers[0]["name"].startswith("Henio Subscription")
 
 
 def test_visible_providers_hide_nous_subscription_when_feature_flag_is_off(monkeypatch):
@@ -311,7 +311,7 @@ def test_visible_providers_hide_nous_subscription_when_feature_flag_is_off(monke
 
     providers = _visible_providers(TOOL_CATEGORIES["browser"], config)
 
-    assert all(not provider["name"].startswith("Nous Subscription") for provider in providers)
+    assert all(not provider["name"].startswith("Henio Subscription") for provider in providers)
 
 
 def test_local_browser_provider_is_saved_explicitly(monkeypatch):

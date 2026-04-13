@@ -45,7 +45,7 @@ henio setup       # Or configure everything at once
 
 | Provider | What it is | How to set up |
 |----------|-----------|---------------|
-| **Nous Portal** | Subscription-based, zero-config | OAuth login via `henio model` |
+| **Henio Portal** | Subscription-based, zero-config | OAuth login via `henio model` |
 | **OpenAI Codex** | ChatGPT OAuth, uses Codex models | Device code auth via `henio model` |
 | **Anthropic** | Claude models directly (Pro/Max or API key) | `henio model` with Claude Code auth, or an Anthropic API key |
 | **OpenRouter** | Multi-provider routing across many models | Enter your API key |
